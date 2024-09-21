@@ -15,7 +15,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo } from "react";
 
 const CHAIN = "solana";
-const CLUSTER = "devnet";
+const CLUSTER = "mainnet";
 const CHAIN_IDENTIFIER = `${CHAIN}:${CLUSTER}`;
 
 export type Account = Readonly<{
@@ -69,7 +69,7 @@ function getPublicKeyFromAddress(address: Base64EncodedAddress): PublicKey {
 
 function cacheReviver(key: string, value: any) {
   if (key === "publicKey") {
-    return new PublicKey(value as PublicKeyInitData); // the PublicKeyInitData should match the actual data structure stored in AsyncStorage
+    return new PublicKey(value as PublicKeyInitData); 
   } else {
     return value;
   }
@@ -97,7 +97,7 @@ async function persistAuthorization(
 }
 
 export const APP_IDENTITY = {
-  name: "Solana Mobile Expo Template",
+  name: "HODL",
   uri: "https://fakedomain.com",
 };
 

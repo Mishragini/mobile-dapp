@@ -6,8 +6,10 @@ function clusternetworkToIndex(clusterName: string): number {
   switch (clusterName) {
     case ClusterNetwork.Devnet:
       return 0;
-    case ClusterNetwork.Testnet:
+    case ClusterNetwork.Mainnet:
       return 1;
+    case ClusterNetwork.Testnet:
+      return 2;
     default:
       throw Error("Invalid cluster selected");
   }
@@ -15,7 +17,9 @@ function clusternetworkToIndex(clusterName: string): number {
 
 export default function ClusterPickerFeature() {
   const { selectedCluster, clusters, setSelectedCluster } = useCluster();
-  const [devNetCluster, testNetCluster] = clusters;
+  const [devNetCluster, mainNetCluster, testNetCluster] = clusters;
+
+
 
   return (
     <>
@@ -27,7 +31,9 @@ export default function ClusterPickerFeature() {
         value={selectedCluster.network}
       >
         <ClusterPickerRadioButtonGroupRow cluster={devNetCluster} />
+        <ClusterPickerRadioButtonGroupRow cluster={mainNetCluster} />
         <ClusterPickerRadioButtonGroupRow cluster={testNetCluster} />
+
       </RadioButton.Group>
     </>
   );

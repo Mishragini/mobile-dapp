@@ -11,25 +11,22 @@ export function HomeScreen() {
   const { selectedAccount } = useAuthorization();
 
   return (
-    <View style={styles.screenContainer}>
+    <View
+      style={[
+        styles.screenContainer,
+        !selectedAccount && styles.centerContent 
+      ]}
+    >
       <Text
-        style={{ fontWeight: "bold", marginBottom: 12 }}
+        style={{ fontWeight: "bold", marginBottom: 12, textAlign: "center" }}
         variant="displaySmall"
       >
-        Solana Mobile Expo Template
+        HODL
       </Text>
       {selectedAccount ? (
         <AccountDetailFeature />
       ) : (
         <>
-          <Section
-            title="Solana SDKs"
-            description="Configured with Solana SDKs like Mobile Wallet Adapter and web3.js."
-          />
-          <Section
-            title="UI Kit and Navigation"
-            description="Utilizes React Native Paper components and the React Native Navigation library."
-          />
           <Section
             title="Get started!"
             description="Connect or Sign in with Solana (SIWS) to link your wallet account."
@@ -45,6 +42,10 @@ const styles = StyleSheet.create({
   screenContainer: {
     padding: 16,
     flex: 1,
+  },
+  centerContent: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonGroup: {
     flexDirection: "column",

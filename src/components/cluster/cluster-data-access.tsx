@@ -41,6 +41,11 @@ export const defaultClusters: Readonly<Cluster[]> = [
     endpoint: clusterApiUrl("testnet"),
     network: ClusterNetwork.Testnet,
   },
+  {
+    name: "mainnet-beta",
+    endpoint: clusterApiUrl("mainnet-beta"),
+    network: ClusterNetwork.Mainnet,
+  },
 ];
 
 export interface ClusterProviderContext {
@@ -86,7 +91,7 @@ function getClusterUrlParam(cluster: Cluster): string {
       suffix = "devnet";
       break;
     case ClusterNetwork.Mainnet:
-      suffix = "";
+      suffix = "mainnet-beta";
       break;
     case ClusterNetwork.Testnet:
       suffix = "testnet";

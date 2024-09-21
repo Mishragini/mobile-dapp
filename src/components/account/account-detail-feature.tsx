@@ -10,10 +10,11 @@ import {
 export function AccountDetailFeature() {
   const { selectedAccount } = useAuthorization();
 
+  const theme = useTheme();
+
   if (!selectedAccount) {
     return null;
   }
-  const theme = useTheme();
 
   return (
     <>
