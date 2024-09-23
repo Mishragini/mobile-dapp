@@ -24,7 +24,7 @@ export function useMobileWallet() {
         return await authorizeSessionWithSignIn(wallet, signInPayload);
       });
     },
-    [authorizeSession]
+    [authorizeSessionWithSignIn]
   );
 
   const disconnect = useCallback(async (): Promise<void> => {
@@ -32,6 +32,21 @@ export function useMobileWallet() {
       await deauthorizeSession(wallet);
     });
   }, [deauthorizeSession]);
+
+  const signTransaction = useCallback(
+    async (
+      transaction: Transaction | VersionedTransaction
+    ): Promise<Transaction | VersionedTransaction> => {
+      return await transact(async (wallet) => {
+        await authorizeSession(wallet);
+        const signedTransactions = await wallet.signTransactions({
+          transactions: [transaction],
+        });
+        return signedTransactions[0];
+      });
+    },
+    [authorizeSession]
+  );
 
   const signAndSendTransaction = useCallback(
     async (
@@ -67,9 +82,10 @@ export function useMobileWallet() {
       connect,
       signIn,
       disconnect,
+      signTransaction,
       signAndSendTransaction,
       signMessage,
     }),
-    [signAndSendTransaction, signMessage]
+    [connect, signIn, disconnect, signTransaction, signAndSendTransaction, signMessage]
   );
 }
