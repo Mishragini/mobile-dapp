@@ -22,6 +22,7 @@
     "@solana/spl-token": "^0.4.1",
     "@solana/web3.js": "^1.78.4",
     "@tanstack/react-query": "^5.24.1",
+    "assert": "^2.1.0",
     "buffer": "^6.0.3",
     "expo": "~50.0.19",
     "expo-clipboard": "~5.0.1",

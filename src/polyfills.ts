@@ -1,7 +1,9 @@
 import { getRandomValues as expoCryptoGetRandomValues } from "expo-crypto";
 import { Buffer } from "buffer";
+import assert from "assert";  // Polyfill for 'assert'
 
 global.Buffer = Buffer;
+global.assert = assert;
 
 // getRandomValues polyfill
 class Crypto {
