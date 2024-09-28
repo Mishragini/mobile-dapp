@@ -18,6 +18,7 @@ import {
 import { useState, useMemo } from "react";
 import { ellipsify } from "../../utils/ellipsify";
 import { AppModal } from "../ui/app-modal";
+import { DepositTokenButton } from "../deposit-token-button";
 
 function lamportsToSol(balance: number) {
   return Math.round((balance / LAMPORTS_PER_SOL) * 100000) / 100000;
@@ -84,6 +85,7 @@ export function AccountButtonGroup({ address }: { address: PublicKey }) {
         >
           Receive
         </Button>
+        <DepositTokenButton />
       </View>
     </>
   );

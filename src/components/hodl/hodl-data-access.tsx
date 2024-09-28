@@ -9,7 +9,6 @@ import { useAnchorWallet } from "../../utils/AnchorWallet";
 import idl from '../../../target/idl.json'
 import * as anchor from "@coral-xyz/anchor";
 
-
 const HODL_PROGRAM_ID = "HDSDejM9dQ549FaWeGhbZeEEHpdRcU4Wz1TPeB2yBFQF";
 
 export function useHodlProgram() {

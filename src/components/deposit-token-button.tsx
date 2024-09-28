@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Button, TextInput, Text } from 'react-native-paper';
-import { PublicKey } from '@solana/web3.js';
 import { useHodlProgram } from './hodl/hodl-data-access';
 import { AppModal } from './ui/app-modal';
+import { useAuthorization } from '../utils/useAuthorization';
 
-interface DepositTokenButtonProps {
-    address: PublicKey;
-    hodlAccount: PublicKey;
-    userTokenAccount: PublicKey;
-}
-
-export function DepositTokenButton({ address, hodlAccount, userTokenAccount }: DepositTokenButtonProps) {
+export function DepositTokenButton() {
+    const { selectedAccount } = useAuthorization();
     const [showDepositModal, setShowDepositModal] = useState(false);
     const [amount, setAmount] = useState('');
-    const { deposit } = useHodlProgram();
+    const { deposit, userDepositPDA } = useHodlProgram();
+
+    if (!selectedAccount) {
+        console.error('selectedAccount is undefined');
+        return <Text>Error: No account selected</Text>;
+    }
+
+    if (!deposit) {
+        console.error('Deposit function is undefined');
+        return <Text>Error: Deposit function not available</Text>;
+    }
 
     const handleDeposit = async () => {
-        if (!amount) return;
+        if (!amount || !selectedAccount || !selectedAccount.publicKey) {
+            console.error('Amount or userTokenAccount is missing');
+            return;
+        }
 
         try {
             await deposit.mutateAsync({
-                hodlAccount,
+                hodlAccount: selectedAccount.publicKey,
                 amount: parseInt(amount),
-                userTokenAccount,
+                userTokenAccount: selectedAccount.publicKey
             });
             setShowDepositModal(false);
             setAmount('');
         } catch (error) {
             console.error('Error depositing tokens:', error);
+            // You might want to show an error message to the user here
         }
     };
 
@@ -55,8 +64,8 @@ export function DepositTokenButton({ address, hodlAccount, userTokenAccount }: D
                         mode="outlined"
                         style={{ marginBottom: 20 }}
                     />
-                    <Text>Depositing to HODL Account: {hodlAccount.toBase58()}</Text>
-                    <Text>From Token Account: {userTokenAccount.toBase58()}</Text>
+                    <Text>Depositing to User Deposit Account: {userDepositPDA?.toBase58() || 'Not available'}</Text>
+                    <Text>From Token Account: {selectedAccount.publicKey?.toBase58()}</Text>
                 </View>
             </AppModal>
         </>

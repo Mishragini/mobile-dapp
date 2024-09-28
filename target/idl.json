@@ -21,10 +21,6 @@
             ],
             "accounts": [
                 {
-                    "name": "hodl_account",
-                    "writable": true
-                },
-                {
                     "name": "user_deposit",
                     "writable": true,
                     "pda": {
@@ -74,137 +70,12 @@
                             },
                             {
                                 "kind": "account",
-                                "path": "hodl_account.authority",
-                                "account": "HodlAccount"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "name": "token_program",
-                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-                },
-                {
-                    "name": "authority",
-                    "writable": true,
-                    "signer": true
-                },
-                {
-                    "name": "system_program",
-                    "address": "11111111111111111111111111111111"
-                }
-            ],
-            "args": [
-                {
-                    "name": "amount",
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "initialize",
-            "discriminator": [
-                175,
-                175,
-                109,
-                31,
-                13,
-                152,
-                155,
-                237
-            ],
-            "accounts": [
-                {
-                    "name": "hodl_account",
-                    "writable": true,
-                    "signer": true
-                },
-                {
-                    "name": "authority",
-                    "writable": true,
-                    "signer": true
-                },
-                {
-                    "name": "system_program",
-                    "address": "11111111111111111111111111111111"
-                }
-            ],
-            "args": []
-        },
-        {
-            "name": "partial_withdraw",
-            "discriminator": [
-                76,
-                249,
-                22,
-                96,
-                222,
-                193,
-                173,
-                38
-            ],
-            "accounts": [
-                {
-                    "name": "hodl_account",
-                    "writable": true
-                },
-                {
-                    "name": "user_deposit",
-                    "writable": true,
-                    "pda": {
-                        "seeds": [
-                            {
-                                "kind": "const",
-                                "value": [
-                                    117,
-                                    115,
-                                    101,
-                                    114,
-                                    95,
-                                    100,
-                                    101,
-                                    112,
-                                    111,
-                                    115,
-                                    105,
-                                    116
-                                ]
-                            },
-                            {
-                                "kind": "account",
                                 "path": "authority"
                             }
                         ]
                     }
                 },
                 {
-                    "name": "user_token_account",
-                    "writable": true
-                },
-                {
-                    "name": "vault",
-                    "writable": true,
-                    "pda": {
-                        "seeds": [
-                            {
-                                "kind": "const",
-                                "value": [
-                                    118,
-                                    97,
-                                    117,
-                                    108,
-                                    116
-                                ]
-                            },
-                            {
-                                "kind": "account",
-                                "path": "hodl_account.authority",
-                                "account": "HodlAccount"
-                            }
-                        ]
-                    }
-                },
-                {
                     "name": "token_program",
                     "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
                 },
@@ -212,6 +83,10 @@
                     "name": "authority",
                     "writable": true,
                     "signer": true
+                },
+                {
+                    "name": "system_program",
+                    "address": "11111111111111111111111111111111"
                 }
             ],
             "args": [
@@ -220,60 +95,6 @@
                     "type": "u64"
                 }
             ]
-        },
-        {
-            "name": "pause",
-            "discriminator": [
-                211,
-                22,
-                221,
-                251,
-                74,
-                121,
-                193,
-                47
-            ],
-            "accounts": [
-                {
-                    "name": "hodl_account",
-                    "writable": true
-                },
-                {
-                    "name": "authority",
-                    "signer": true,
-                    "relations": [
-                        "hodl_account"
-                    ]
-                }
-            ],
-            "args": []
-        },
-        {
-            "name": "unpause",
-            "discriminator": [
-                169,
-                144,
-                4,
-                38,
-                10,
-                141,
-                188,
-                255
-            ],
-            "accounts": [
-                {
-                    "name": "hodl_account",
-                    "writable": true
-                },
-                {
-                    "name": "authority",
-                    "signer": true,
-                    "relations": [
-                        "hodl_account"
-                    ]
-                }
-            ],
-            "args": []
         },
         {
             "name": "withdraw",
@@ -289,10 +110,6 @@
             ],
             "accounts": [
                 {
-                    "name": "hodl_account",
-                    "writable": true
-                },
-                {
                     "name": "user_deposit",
                     "writable": true,
                     "pda": {
@@ -342,8 +159,7 @@
                             },
                             {
                                 "kind": "account",
-                                "path": "hodl_account.authority",
-                                "account": "HodlAccount"
+                                "path": "authority"
                             }
                         ]
                     }
@@ -362,19 +178,6 @@
         }
     ],
     "accounts": [
-        {
-            "name": "HodlAccount",
-            "discriminator": [
-                210,
-                120,
-                75,
-                63,
-                89,
-                89,
-                35,
-                31
-            ]
-        },
         {
             "name": "UserDeposit",
             "discriminator": [
@@ -432,16 +235,6 @@
             "code": 6002,
             "name": "UnauthorizedWithdrawal",
             "msg": "Unauthorized withdrawal attempt"
-        },
-        {
-            "code": 6003,
-            "name": "ContractPaused",
-            "msg": "Contract is paused"
-        },
-        {
-            "code": 6004,
-            "name": "InsufficientBalance",
-            "msg": "Insufficient balance for withdrawal"
         }
     ],
     "types": [
@@ -460,30 +253,6 @@
                     },
                     {
                         "name": "unlock_timestamp",
-                        "type": "i64"
-                    }
-                ]
-            }
-        },
-        {
-            "name": "HodlAccount",
-            "type": {
-                "kind": "struct",
-                "fields": [
-                    {
-                        "name": "authority",
-                        "type": "pubkey"
-                    },
-                    {
-                        "name": "total_deposits",
-                        "type": "u64"
-                    },
-                    {
-                        "name": "paused",
-                        "type": "bool"
-                    },
-                    {
-                        "name": "last_updated",
                         "type": "i64"
                     }
                 ]
